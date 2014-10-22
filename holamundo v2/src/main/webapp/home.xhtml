@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+xmlns:f="http://java.sun.com/jsf/core"
+xmlns:h="http://java.sun.com/jsf/html">
+<head>
+	<title>Ejemplo de prueba con JSF!</title>
+</head>
+<h:body>
+	#{holaMundo.mensaje}
+	<h3>Navegación implícita (auto-navegación dentro de una página JSF</h3>
+	<h:form>
+		<h:commandLink action="pagina1}" value=" Pagina 1 " />
+		<br />
+		<h:commandLink action="pagina2" value=" Pagina 2 " />
+	</h:form>
+
+	<h3>Navegación implícita (auto-navegación utilizando un MB)</h3>
+	<h:form>
+		<h:commandLink action="#{controladorNavegacion.procesarPagina1}" value=" Pagina 1 " />
+		<br />
+		<h:commandLink action="#{controladorNavegacion.procesarPagina2}" value=" Pagina 2 " />
+	</h:form>
+
+	<h3>Navegación condicional</h3>
+	<h:form>
+		<h:commandLink action="#{controladorNavegacion.mostrarPagina}"	value=" Pagina 1 ">
+			<f:param name="pageId" value="1" />
+		</h:commandLink>
+		<h:commandLink action="#{controladorNavegacion.mostrarPagina}"	value=" Pagina 2 ">
+			<f:param name="pageId" value="2" />
+		</h:commandLink>
+		<h:commandLink action="#{controladorNavegacion.mostrarPagina}"	value=" Volver a Inicio ">
+			<f:param name="pageId" value="3" />
+		</h:commandLink>
+	</h:form>
+</h:body>
+</html>
