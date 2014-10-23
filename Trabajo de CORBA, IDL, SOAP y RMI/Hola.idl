@@ -1,0 +1,7 @@
+module HolaApp {
+  interface Hola
+  {
+  string decirHola();
+  oneway void tirar();
+  };
+};
