@@ -5,7 +5,7 @@
 	<artifactId>P1</artifactId>
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
-	<name>holamundo Maven Webapp</name>
+	<name>P1 Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 	<dependencies>
 		<dependency>
@@ -26,6 +26,6 @@
 		</dependency>
 	</dependencies>
 	<build>
-	<finalName>Práctica 1</finalName>
+	<finalName>P1</finalName>
 	</build>
 </project>

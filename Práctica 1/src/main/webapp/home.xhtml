@@ -5,9 +5,23 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
 <head>
-<title>Práctica 1 - Daniel Díaz Salas</title>
+<title>P1 - Daniel Díaz Salas</title>
+<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 </head>
-<h:body>	
-
+<h:body>
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			P1
+		</div>
+		<div class="panel-body">
+			<h:form>
+				<div class="form-group">
+					<label>Enter parameter for all filters</label>
+					<h:inputText value="#{client.value}" styleClass="form-control"/>	
+				</div>				
+				<h:commandButton action="#{client.executeFilterManager}" styleClass="btn btn-info" value="Go!"/>
+			</h:form>
+		</div>
+	</div>
 </h:body>
 </html>
