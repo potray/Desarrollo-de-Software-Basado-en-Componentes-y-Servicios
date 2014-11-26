@@ -8,19 +8,21 @@
 <title>P1 - Daniel Díaz Salas</title>
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 </head>
-<h:body>
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			P1
-		</div>
-		<div class="panel-body">
-			<h:form>
-				<div class="form-group">
-					<label>Enter parameter for all filters</label>
-					<h:inputText value="#{client.value}" styleClass="form-control"/>	
-				</div>				
-				<h:commandButton action="#{client.executeFilterManager}" styleClass="btn btn-info" value="Go!"/>
-			</h:form>
+<h:body>	
+	<div class="container">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h2>P1 - Daniel Díaz Salas</h2>
+			</div>
+			<div class="panel-body">
+				<h:form>
+					<div class="form-group">
+						<label>Enter parameter for all filters</label>
+						<h:inputText value="#{client.value}" styleClass="form-control"/>	
+					</div>				
+					<h:commandButton action="#{client.executeFilterManager}" styleClass="btn btn-info" value="Go!"/>
+				</h:form>
+			</div>
 		</div>
 	</div>
 </h:body>

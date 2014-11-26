@@ -9,19 +9,18 @@
 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
 </head>
 <h:body>	
-	<div class="panel panel-default">
-		<div class="panel-heading">			
-			<h3>#{interface.status}</h3>
+	<div class="container">
+		<div class="panel panel-default">
+			<div class="panel-heading">			
+				<h2>#{interface.status}</h2>
+			</div>
+			<div class="panel-body">
+				<h:form>
+					<h:commandButton styleClass="#{interface.turnOnBtnStyle}" value="#{interface.turnOnBtnText}" action="#{interface.changeTurnOnStyle}" />
+					<h:commandButton styleClass="#{interface.accelerateBtnStyle}" value="Accelerate" action="#{interface.accelerate}" />
+				</h:form>			
+			</div>
 		</div>
-		<div class="panel-body">
-			<h:form>
-				<h:commandButton styleClass="#{interface.turnOnBtnStyle}" value="#{interface.turnOnBtnText}" action="#{interface.changeTurnOnStyle}" />
-				<h:commandButton styleClass="#{interface.accelerateBtnStyle}" value="Accelerate" action="#{interface.accelerate}" />
-				
-			</h:form>			
-		</div>
-	</div>
-
-	
+	</div>	
 </h:body>
 </html>

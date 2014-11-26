@@ -65,7 +65,6 @@ public class Interface implements Filter{
 	public String getStatus() {
 		return status;
 	}	
-
 	
 	@Override
 	public double execute(double number) {
