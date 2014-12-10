@@ -1,6 +1,7 @@
 package listaCorreo;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,15 +17,23 @@ public class ListaCorreosServlet extends HttpServlet{
 	}
 	
 	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException ,IOException {
+		System.out.println("GET");
+	};
+	
+	@Override
 	protected void doPost(HttpServletRequest peticion, HttpServletResponse respuesta) throws ServletException, IOException {
+		System.out.println("POST");
 		String url = "/index.html";
 
 		// Obtener la accion a partir de "peticion" (getParameter("action");
 		String action = peticion.getParameter("action");
+		System.out.println("Action = " + action);
 		//Obtener el resto de parámetros
 		String email = peticion.getParameter("email");
 		String nombre = peticion.getParameter("nombre");
 		String apellidos = peticion.getParameter("apellidos");
+		System.out.println("Email = " + email);
 		
 		//Crear un objeto Usuario que será con el que se trabaje con la clase BDUsuario.
 		Usuario usuario = new Usuario(email, nombre, apellidos);
@@ -63,8 +72,8 @@ public class ListaCorreosServlet extends HttpServlet{
 		/*
 		request.setAttribute("user", user);
 		request.setAttribute("message", message);*/
-
-		getServletContext().getRequestDispatcher(url).forward(peticion, respuesta);
+		
+		respuesta.sendRedirect("/index.html");
 
 	}
 	

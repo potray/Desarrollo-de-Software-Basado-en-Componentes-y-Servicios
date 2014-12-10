@@ -23,6 +23,8 @@ public class BDUsuario {
 		em.persist(usuario);
 		em.getTransaction().commit();
 		em.close();
+		
+		System.out.println("INSERTADO");
 	}
 
 	public static void actualizar(Usuario usuario) {
@@ -67,6 +69,6 @@ public class BDUsuario {
 		Query q = em.createQuery("SELECT u FROM Usuario u WHERE u.email = '" + email + "'");
 		List <Usuario> result = q.getResultList();
 		
-		return result.isEmpty();
+		return !result.isEmpty();
 	}
 }

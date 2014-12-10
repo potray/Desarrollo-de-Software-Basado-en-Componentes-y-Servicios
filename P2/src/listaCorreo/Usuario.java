@@ -20,6 +20,12 @@ public class Usuario implements Serializable{
 	private String nombre;
 	private String apellido;	
 	
+	public Usuario (){
+		email = "";
+		nombre = "";
+		apellido = "";
+	}
+	
 	public Usuario (String email, String nombre, String apellido){
 		this.email = email;
 		this.nombre = nombre;
