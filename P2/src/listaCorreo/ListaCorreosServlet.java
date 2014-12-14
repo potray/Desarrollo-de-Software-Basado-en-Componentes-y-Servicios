@@ -2,6 +2,7 @@ package listaCorreo;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,12 +14,15 @@ public class ListaCorreosServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 
 	public void init () throws ServletException{
-		System.out.println("Servlet inicializado!!");
+		System.out.println("Servlet inicializado!!");		
 	}
 	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException ,IOException {
-		System.out.println("GET");
+	protected void doGet(HttpServletRequest peticion, HttpServletResponse respuesta) throws ServletException ,IOException {		
+		List <Usuario> usuarios = BDUsuario.seleccionarTodosUsuarios();
+		peticion.setAttribute("usuarios", usuarios);
+		
+		peticion.getRequestDispatcher("index.jsp").forward(peticion, respuesta);
 	};
 	
 	@Override
@@ -28,52 +32,58 @@ public class ListaCorreosServlet extends HttpServlet{
 
 		// Obtener la accion a partir de "peticion" (getParameter("action");
 		String action = peticion.getParameter("action");
-		System.out.println("Action = " + action);
 		//Obtener el resto de parámetros
 		String email = peticion.getParameter("email");
 		String nombre = peticion.getParameter("nombre");
-		String apellidos = peticion.getParameter("apellidos");
-		System.out.println("Email = " + email);
+		String apellido = peticion.getParameter("apellido");
+		String idUsuarioString = peticion.getParameter("idUsuario");
 		
 		//Crear un objeto Usuario que será con el que se trabaje con la clase BDUsuario.
-		Usuario usuario = new Usuario(email, nombre, apellidos);
+		Usuario usuario;
+		if (idUsuarioString != null) 
+			usuario = new Usuario(email, nombre, apellido, Long.valueOf(idUsuarioString));
+		else
+			usuario = new Usuario (email, nombre, apellido);
 
 		// Realizar la accion y asignar el URL a la pagina apropiada
 		switch (action){
 		case "insertar": 
 			//Miro si existe un usuario con el mismo email. Si existe muestro mensaje de erorr, si no lo inserto.
 			if (BDUsuario.existeEmail(email)){
-				//TODO: crear mensaje de error
-				System.out.println("Error, email existe");
+				peticion.setAttribute("mensaje", "errorUsuario");
 			}else{
 				BDUsuario.insertar(usuario);
 			}
 			break;
 		case "actualizar":
-			//Simplemente se actualiza
-			BDUsuario.actualizar(usuario);
+			//Se actualiza y se comunica
+			if (BDUsuario.existeEmail(email)){
+				peticion.setAttribute("mensaje", "errorUsuario");				
+			}
+			else{
+				BDUsuario.actualizar(usuario);
+				peticion.setAttribute("mensaje", "actualizado");
+			}
 			break;
 		case "eliminar":
-			//Simplemente se elimina
+			//Se elimina y se comunica
 			BDUsuario.eliminar(usuario);
+			peticion.setAttribute("mensaje", "eliminado");
 			break;
 		case "seleccionar":
-			//Se selecciona el usuario y se muestran sus datos
-			Usuario usuarioExistente = BDUsuario.seleccionarUsuario(email);
-			System.out.println("Encontrado el usuario");
-			//TODO: Mostrar los datos
+			//Se selecciona el usuario si existe y se devuelve. Si no, se notifica
+			if(BDUsuario.existeEmail(email)){				
+				Usuario usuarioExistente = BDUsuario.seleccionarUsuario(email);
+				peticion.setAttribute("usuario", usuarioExistente);				
+			}else
+				peticion.setAttribute("mensaje", "usuarioNoExiste");
+			break;
 		}
-		// almacenar los datos en el objeto de Usuario
-		//TODO ¿?
-
-		// validar los parametros utilizando los metodos de BDUsuario; si existe la direccion de email en la base de datos, mostrar un mensaje y pedir otra direccion
-		//Insertar los datos del usuario
 		
-		/*
-		request.setAttribute("user", user);
-		request.setAttribute("message", message);*/
+		List <Usuario> usuarios = BDUsuario.seleccionarTodosUsuarios();
+		peticion.setAttribute("usuarios", usuarios);
 		
-		respuesta.sendRedirect("/index.html");
+		peticion.getRequestDispatcher("index.jsp").forward(peticion, respuesta);
 
 	}
 	

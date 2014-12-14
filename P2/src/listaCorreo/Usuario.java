@@ -9,12 +9,9 @@ import javax.persistence.Id;
 
 @Entity
 public class Usuario implements Serializable{
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue
 	private long idUsuario;
 	private String email;
 	private String nombre;
@@ -32,6 +29,27 @@ public class Usuario implements Serializable{
 		this.apellido = apellido;
 	}
 
+	public Usuario(String email, String nombre, String apellido, long idUsuario) {
+		this.email = email;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.idUsuario = idUsuario;
+	}
+
+	/**
+	 * @return the idUsuario
+	 */
+	public long getIdUsuario() {
+		return idUsuario;
+	}
+
+	/**
+	 * @param idUsuario the idUsuario to set
+	 */
+	public void setIdUsuario(long idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+	
 	/**
 	 * @return the email
 	 */
