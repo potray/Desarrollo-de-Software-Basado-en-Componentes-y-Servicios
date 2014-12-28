@@ -17,7 +17,7 @@ public class ListaCorreosServlet extends HttpServlet{
 		System.out.println("Servlet inicializado!!");		
 	}
 	
-	@Override
+	
 	protected void doGet(HttpServletRequest peticion, HttpServletResponse respuesta) throws ServletException ,IOException {		
 		List <Usuario> usuarios = BDUsuario.seleccionarTodosUsuarios();
 		peticion.setAttribute("usuarios", usuarios);
@@ -25,7 +25,7 @@ public class ListaCorreosServlet extends HttpServlet{
 		peticion.getRequestDispatcher("index.jsp").forward(peticion, respuesta);
 	};
 	
-	@Override
+	
 	protected void doPost(HttpServletRequest peticion, HttpServletResponse respuesta) throws ServletException, IOException {
 		System.out.println("POST");
 		String url = "/index.html";
